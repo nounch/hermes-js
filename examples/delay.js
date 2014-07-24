@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  var hermes = new Hermes();
+  var hermes = new Hermes(null);
   var testMessage = 'This is a message to you.'
 
   var testButton = $('<button type="button" class="btn btn-primary">Generate message</button>')

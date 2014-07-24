@@ -35,12 +35,17 @@ JavaScript to interact with it (event handlers etc.).
 
 2. Make a new `Hermes` object:
 
-        var hermes = new Hermes('.main-content');
+        var hermes = new Hermes('.main-content', true);
 
-   `Hermes` takes a jQuery-like selector as an optional argument. This is
-   the point in the DOM where Hermes will *append* itself to the DOM.
-   If no argument is specified, Hermes appends itself to the `html`
-   element.
+   `Hermes` takes a jQuery-like selector as an optional first argument.
+   This is the point in the DOM where Hermes will *append* itself to the
+   DOM. If no argument is specified, Hermes appends itself to the `html`
+   element. `null` means "choose the default value".
+
+   the second optional parameter indicates where the messages should be
+   displayed. `true` means "on the left side of the screen", else messages
+   will be shown on the right side of the screen. Default value: `false`
+   (= "show messages on the right side").
 
 3. Write a message to the screen:
 

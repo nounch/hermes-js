@@ -1,8 +1,9 @@
 var Hermes = (function() {
 
-  function Hermes(parent) {
+  function Hermes(parent, left) {
     var self = this;
     self.parent = parent || 'body';
+    self.leftAlign = left || false;
   }
 
   Hermes.prototype = new (function() {
@@ -32,7 +33,7 @@ var Hermes = (function() {
         container.css({
           'z-index': '999998',
           'position': 'fixed',
-          'right': '0',
+          // 'right': '0',
           'top': '0',
           'padding-top': '10px',
           'width': '320px',
@@ -40,6 +41,12 @@ var Hermes = (function() {
           'overflow': 'auto',
           'padding': '5px',
         });
+	// Align the messages container on the left or right of the screen.
+	if (self.leftAlign) {
+	  container.css({'left': '0'});
+	} else {
+	  container.css({'right': '0'});
+	}
         container.hide().appendTo(self.parent).show();
       } else {
         var container = $('#' + containerId)
