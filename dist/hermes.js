@@ -7,10 +7,15 @@ var Hermes = (function() {
 
   Hermes.prototype = new (function() {
 
-    this.message = function(message, style) {
+    this.message = function(message, style, delay) {
       var self = this;
 
       var style = style || {};
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || 5000;
+      }
       var containerId = 'very-special-message-container-element-' +
         'b39aad4e-12c7-11e4-b4d0-60eb69544a6d';
       var innerContainerId = 'very-special-inner-message-container-' +
@@ -112,6 +117,13 @@ var Hermes = (function() {
 
       elm.prependTo(innerContainer).slideDown('fast');
 
+      // Remove the message after some delay, if required.
+      if (delay != false) {
+        $(elm).delay(delay).slideUp('slow', function() {
+          $(elm).remove();
+        });
+      }
+
       // Add a `Remove all' button.
       if (!$('#' + removeAllButtonId).length > 0 &&
           $(innerContainer)
@@ -152,40 +164,65 @@ var Hermes = (function() {
       }
     };
 
-    this.inverse = function(message) {
+    this.inverse = function(message, delay) {
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || null;
+      }
       this.message(message, {
         'background-color': '#79756C',
         'color': 'rgba(255, 255, 255, 0.8)',
         'text-shadow': '-1px -1px rgba(0, 0, 0, 0.3)',
-      });
+      }, delay);
     };
 
-    this.error = function(message) {
+    this.error = function(message, delay) {
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || null;
+      }
       this.message(message, {
         'background-color': '#FFBDCC',
         'color': '#886766',
-      });
+      }, delay);
     };
 
-    this.warning = function(message) {
+    this.warning = function(message, delay) {
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || null;
+      }
       this.message(message, {
         'background-color': '#FCFFD9',
         'color': '#868864',
-      });
+      }, delay);
     };
 
-    this.info = function(message) {
+    this.info = function(message, delay) {
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || null;
+      }
       this.message(message, {
         'background-color': '#A0C8DB',
         'color': '#556876',
-      });
+      }, delay);
     };
 
-    this.success = function(message) {
+    this.success = function(message, delay) {
+      if (delay == false || delay == 'never') {
+        var delay = false;
+      } else {
+        var delay = delay || null;
+      }
       this.message(message, {
         'background-color': '#C4F2C8',
         'color': '#628114',
-      });
+      }, delay);
     };
 
   })();

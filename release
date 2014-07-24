@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+rm -rf ./dist/*;
+printf "Removed previous dist files.\n";
+cp -r ./src/hermes.js ./dist;
+uglifyjs ./src/hermes.js -m -o ./dist/hermes.min.js;
+printf "Built new dist files:\n\n";
+ls -1 ./dist/*
+printf "\nDone.\n";
