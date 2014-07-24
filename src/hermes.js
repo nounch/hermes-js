@@ -165,7 +165,7 @@ var Hermes = (function() {
           if (messages.length < 20) {
             messages.each(function() {
               var message = $(this);
-              message.slideUp('fast', function() {
+              message.clearQueue().slideUp('fast', function() {
                 message.remove();
               });
             });
