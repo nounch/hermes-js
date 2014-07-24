@@ -19,8 +19,8 @@ $(document).ready(function() {
   hermes.inverse('This message is <b>inverse</b>.');
   hermes.error('This is an <b>error</b> message.', 8000);
   hermes.warning('This is a <b>warning</b> message.');
-  hermes.info('This is an <b>info</b> message.', 'never');
-  hermes.success('This is a <b>success</b> message.', false);
+  hermes.info('This is an <b>info</b> message.', 500);
+  hermes.success('This is a <b>success</b> message.', 500);
 
   // Source: http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png
   hermes.message('Here is an image: <img src="http://upload.wikimedia.org/wikipedia/en/2/24/Lenna.png" style="width: 60px; height: 60px; margin-left: 40px;" alt="No image found" />', {}, 3500);
@@ -31,9 +31,9 @@ $(document).ready(function() {
     'color': '#FFFF8A',
     'text-shadow': '0 2px 3px #FF0000, 0 -2px 3px #121212',
     'font-weight': 'bold',
-  }, false);
+  }, 500);
 
-  hermes.message('This is a slightly longer message that demonstrates that a message element automatically adjusts to the message length.', {}, 'never');
+  hermes.message('This is a slightly longer message that demonstrates that a message element automatically adjusts to the message length.', {}, 500);
   hermes.message(testMessage);
 
 });

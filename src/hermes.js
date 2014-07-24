@@ -121,6 +121,15 @@ var Hermes = (function() {
       if (delay != false) {
         $(elm).delay(delay).slideUp('slow', function() {
           $(elm).remove();
+          // Remove the `Remove all' button, if necessary.
+          if ($('#' + removeAllButtonId).length > 0 &&
+              $(innerContainer)
+              .find('.' + messageClass).length < messagesThreshold + 2) {
+            var removeAllButton = $('#' + removeAllButtonId);
+            removeAllButton.slideUp('normal', function() {
+              removeAllButton.remove();
+            });
+          }
         });
       }
 
