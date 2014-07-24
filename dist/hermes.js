@@ -23,9 +23,12 @@ var Hermes = (function() {
         'element-38c6bfb6-12d3-11e4-a518-60eb69544a6d';
       var removeAllButtonId = 'very-special-removea-all-button-' +
         '7633e2bc-12d2-11e4-9b7c-60eb69544a6d';
+      var sideToggleButtonId = 'very-special-side-toggle-button-' +
+	'6c0150e4-133c-11e4-9992-60eb69544a6d';
       var messagesThreshold = 5;
 
       if (!$('#' + containerId).length > 0) {
+
         var container = $('<div id="' + containerId + '">' +
                           '<div id="' + innerContainerId + '"></div>' +
                           '</div>');
@@ -33,7 +36,6 @@ var Hermes = (function() {
         container.css({
           'z-index': '999998',
           'position': 'fixed',
-          // 'right': '0',
           'top': '0',
           'padding-top': '10px',
           'width': '320px',
@@ -48,9 +50,51 @@ var Hermes = (function() {
 	  container.css({'right': '0'});
 	}
         container.hide().appendTo(self.parent).show();
+
+	// Make the element movable from left <-> right.
+	if (!$('#' + sideToggleButtonId).length > 0) {
+          var sideToggleButton = $('<div id="' + sideToggleButtonId +
+                                   '">← Move →</div>');
+          container.prepend(sideToggleButton);
+	} else {
+          var sideToggleButton = $('#' + sideToggleButtonId);
+	}
+	sideToggleButton.click(function(e) {
+          e.preventDefault();
+          if (container.css('left') == '0px') {
+            container.animate({'right': '0px', 'left': 'none'}, 'fast');
+          } else {
+            container.animate({'left': '0px', 'right': 'none'}, 'fast');
+          }
+	});
+	sideToggleButton.css({
+	  'background-color': 'rgba(80, 80, 80, 0.5)',
+	  'color': '#F1F1F1',
+	  'text-shado': '0 0 3px #121212',
+	  'position': 'fixed',
+	  'margin-bottom': '-20px',
+	  'font-weight': 'bold',
+	  'font-family': 'Helvetica',
+	  'margin-left': '20px',
+	  'margin-right': '180px',
+	  'text-align': 'center',
+          'font-size': '12px',
+          'cursor': 'pointer',
+          'display': 'none',
+          'padding': '4px',
+          'border-radius': '10px',
+	});
+	// Make the side toggle button visible/hide it.
+        container.hover(function() {
+          sideToggleButton.fadeIn('fast');
+        }, function() {
+          sideToggleButton.fadeOut('fast');
+        });
+
       } else {
         var container = $('#' + containerId)
       }
+
       var innerContainer = $('#' + innerContainerId)
 
       var messageClass = 'very-special-message-element-'+
@@ -107,8 +151,12 @@ var Hermes = (function() {
       closeButton.click(function(e) {
         e.preventDefault();
         var message = $(this).parent('.' + messageClass);
-        message.slideUp('normal', function() {
+        message.clearQueue().slideUp('normal', function() {
           message.remove();
+          // Remove the container itself if there are no messages
+          // anymore.
+          container.find('.' + messageClass).length == 0 ?
+            container.remove(): null;
         });
 
         // Remove the `Remove all' button, if necessary.
@@ -137,25 +185,34 @@ var Hermes = (function() {
               removeAllButton.remove();
             });
           }
+
+	  // Remove the container itself if there are no messages
+	  // anymore.
+	  container.find('.' + messageClass).length == 0 ?
+	    container.remove(): null;
         });
       }
-
       // Add a `Remove all' button.
       if (!$('#' + removeAllButtonId).length > 0 &&
           $(innerContainer)
           .find('.' + messageClass).length > messagesThreshold) {
         var removeAllButton = $('<div id="' + removeAllButtonId +
-                                '">Remove all<div>');
+				'">Remove all<div>');
         removeAllButton.css({
           'display': 'none',
           'font-size': '12px',
           'text-align': 'center',
           'cursor': 'pointer',
           'background-color': '#57534A',
-          'color': '#F1F1E1',
+          'color': '#CACACA',
+          'text-shadow': '-1px -1px 0 #121212',
+          'font-weight': 'bold',
+          'font-family': 'Helvetica',
           'border-radius': '5px 5px 0 0',
           'margin-left': '10px',
           'margin-right': '10px',
+          'padding-top': '4px',
+          'padding-bottom': '4px',
         });
         removeAllButton.click(function(e) {
           var button = $(this);
@@ -174,9 +231,16 @@ var Hermes = (function() {
           }
           button.slideUp('fast', function() {
             button.remove();
+
+            // Remove the container itself if there are no messages
+	    // anymore.
+            container.find('.' + messageClass).length == 0 ?
+              container.remove(): null;
           });
         });
-        removeAllButton.prependTo(container).slideDown('fast');
+	// removeAllButton.prependTo(container).slideDown('fast');
+	removeAllButton.insertAfter(container.find('*').first())
+	  .slideDown('fast');
       }
     };
 

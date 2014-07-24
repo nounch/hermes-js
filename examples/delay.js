@@ -17,7 +17,15 @@ $(document).ready(function() {
   hermes.message('Did you notice the <span style="background-color: #57534A; color: #F1F1E1; font-size: 12px; border-radius: 5px 5px 0 0; text-shadow: none; padding-left: 10px; padding-right: 10px;">Remove all</span> button above? Also, there are close buttons →', {}, 2000);
   hermes.message('A message can contain HTML, e.g. a <a href="#">link</a>.');
   hermes.inverse('This message is <b>inverse</b>.');
-  hermes.error('This is an <b>error</b> message.', 8000);
+  hermes.error('This is an <b>error</b> message.', false);
+  hermes.message('This is not an <b>error</b> message.', {}, false);
+  hermes.message('This is not an <b>error</b> message.', {}, false);
+  hermes.message('This is not an <b>error</b> message.', {}, false);
+  hermes.message('This is not an <b>error</b> message.', {}, false);
+  hermes.message('This is not an <b>error</b> message.', {}, false);
+  hermes.message('This is a <input type="text" placeholder="text field"/>.', {
+    'border': '10px solid #CAB6B6',
+  }, false);
   hermes.warning('This is a <b>warning</b> message.');
   hermes.info('This is an <b>info</b> message.', 500);
   hermes.success('This is a <b>success</b> message.', 500);

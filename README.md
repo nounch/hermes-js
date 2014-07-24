@@ -12,6 +12,8 @@ website. This has been done before, but Hermes is a bit different:
 - Messages can contain arbitrary HTML (links, images/gifs/avatars, tables,
   lists, ...).
 - Every message is 100% stylable with CSS.
+- If the messages block the view, they can be moved to the other side of
+  the screen.
 
 For your convenience, Hermes automatically adds a scroll bar whenever there
 are more messages than screen estate. A "Remove all" button appears at the
