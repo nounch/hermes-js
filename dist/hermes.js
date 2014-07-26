@@ -53,8 +53,9 @@ var Hermes = (function() {
 
 	// Make the element movable from left <-> right.
 	if (!$('#' + sideToggleButtonId).length > 0) {
-          var sideToggleButton = $('<div id="' + sideToggleButtonId +
-                                   '">← Move →</div>');
+          var sideToggleButton = $(
+	    '<div title="Move to other side of the screen" id="' +
+	      sideToggleButtonId + '">← →</div>');
           container.prepend(sideToggleButton);
 	} else {
           var sideToggleButton = $('#' + sideToggleButtonId);
@@ -196,12 +197,12 @@ var Hermes = (function() {
       if (!$('#' + removeAllButtonId).length > 0 &&
           $(innerContainer)
           .find('.' + messageClass).length > messagesThreshold) {
-        var removeAllButton = $('<div id="' + removeAllButtonId +
-				'">Remove all<div>');
+        var removeAllButton = $('<div title="Remove all messages" id="' +
+				removeAllButtonId + '">&times;<div>');
         removeAllButton.css({
           'display': 'none',
-          'font-size': '12px',
-          'text-align': 'center',
+	  'font-size': '20px',
+	  'text-align': 'right',
           'cursor': 'pointer',
           'background-color': '#57534A',
           'color': '#CACACA',
@@ -211,8 +212,7 @@ var Hermes = (function() {
           'border-radius': '5px 5px 0 0',
           'margin-left': '10px',
           'margin-right': '10px',
-          'padding-top': '4px',
-          'padding-bottom': '4px',
+	  'padding-right': '10px',
         });
         removeAllButton.click(function(e) {
           var button = $(this);
